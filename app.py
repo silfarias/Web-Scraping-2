@@ -4,16 +4,16 @@ import os
 
 def obtencion_img():
     url = "https://www.fravega.com/l/celulares/celulares-liberados/?djazz_ref=&djazz_srv=circular-categories&djazz_src=HOME&djazz_pos=2"
-    response = requests.get(url)
+    response = requests.get(url) # realiza una solicitud GET a la url
     if response.status_code == 200:
-        soup = BeautifulSoup(response.text, 'html.parser')
-        imagenes = []
-        resp = soup.find_all('img', src=True)
-        for img in resp:
-            src = img['src']
-            if src.endswith('.jpg') or src.endswith('.png') or src.endswith('.webp'):
-                imagenes.append(src)
-        return imagenes
+        soup = BeautifulSoup(response.text, 'html.parser') # si la respuesta es exitosa, extrae el contenido HTML de la respuesta
+        imagenes = [] # lista para almacenar las urls
+        resp = soup.find_all('img', src=True) # obtiene todas las etiquetas img con atributo src
+        for img in resp: # recorre cada etiqueta img
+            src = img['src'] # obtiene el atributo src
+            if src.endswith('.jpg') or src.endswith('.png') or src.endswith('.webp'): 
+                imagenes.append(src) # si las imagenes son .jpg, .png o .webp, las agrega a la lista
+        return imagenes # retornamos lista
 
 
 
